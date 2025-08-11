@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pizzaria do Bairro - Cardápio Online</title>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+   <nav class="navbar">
+  <div class="logo">Pizzaria do Bairro</div>
+  
+  <button class="menu-toggle" aria-label="Abrir menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <ul class="nav-links">
+    <li><a href="#cardapio">Cardápio</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#contato">Contato</a></li>
+    <li>
+      <button id="btn-carrinho" class="btn-carrinho" aria-expanded="false" aria-controls="carrinho-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-carrinho" viewBox="0 0 24 24">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        Carrinho (<span id="contador-carrinho">0</span>)
+      </button>
+    </li>
+  </ul>
+</nav>
+
+
+<!-- overlay (fecha ao clicar fora) -->
+<div id="carrinho-overlay" class="carrinho-overlay" aria-hidden="true"></div>
+
+<!-- aside tipo painel lateral (inicialmente fechado) -->
+<aside id="carrinho-container" class="carrinho-container" role="dialog" aria-modal="true" aria-labelledby="carrinho-title" aria-hidden="true">
+  <div class="carrinho-conteudo">
+    <h2 id="carrinho-title">Seu Carrinho</h2>
+    <ul id="lista-carrinho">
+      <!-- itens adicionados dinamicamente -->
+    </ul>
+
+    <p>Total: R$ <span id="total-carrinho">0,00</span></p>
+
+    <button id="finalizar-pedido" class="btn-acao">Finalizar Pedido</button>
+    <button id="fechar-carrinho" class="btn-fechar">Fechar</button>
+  </div>
+</aside>
+
+  </header>
+
+  <!-- galeria -->
+  <section class="galeria" id="galeria">
+  <h2>Galeria de Fotos</h2>
+
+  <div class="galeria-grid">
+    <div class="foto-item">
+      <img src="images/mussarela.jpg" alt="Pizza Mussarela" />
+    </div>
+    <div class="foto-item">
+      <img src="images/calabresa.jpg" alt="Pizza Calabresa" />
+    </div>
+    <div class="foto-item">
+      <img src="images/ambiente.jpg" alt="Ambiente da Pizzaria" />
+    </div>
+    <div class="foto-item">
+      <img src="images/equipe.jpg" alt="Equipe da Pizzaria" />
+    </div>
+    <div class="foto-item">
+      <img src="images/portuguesa.jpg" alt="Pizza Portuguesa" />
+    </div>
+    <div class="foto-item">
+      <img src="images/gevetariana.jpg" alt="Pizza Vegetariana" />
+    </div>
+  </div>
+</section>
+
+ <!-- cardapio -->
+<section id="cardapio" class="cardapio">
+  <h2>Cardápio & Promoções</h2>
+
+  <div class="carousel-container">
+    <button class="prev" aria-label="Anterior">&#10094;</button>
+
+    <div class="carousel-track" id="lista-pizzas">
+      <!-- cards gerados pelo JS -->
+    </div>
+
+    <button class="next" aria-label="Próximo">&#10095;</button>
+  </div>
+</section>
+
+ <!-- promocoes -->
+<section id="promocoes" class="promocoes">
+  <h2>Promoções & Cupons</h2>
+
+  <div class="promocoes-lista">
+    <div class="promocao-card">
+      <h3>Promoção da Semana</h3>
+      <p>Compre 2 pizzas médias e ganhe uma pequena grátis!</p>
+      <span class="validade">Válido até: 30/09/2025</span>
+    </div>
+
+    <div class="promocao-card">
+      <h3>Desconto para Primeira Compra</h3>
+      <p>Use o cupom <strong>BOASVINDAS10</strong> e ganhe 10% de desconto!</p>
+      <input type="text" id="input-cupom" placeholder="Digite seu cupom aqui" />
+      <button id="btn-aplicar-cupom">Aplicar Cupom</button>
+      <p id="mensagem-cupom" class="mensagem-cupom"></p>
+    </div>
+
+    <div class="promocao-card">
+      <h3>Happy Hour</h3>
+      <p>Das 17h às 19h, pizzas médias por apenas R$ 25,90!</p>
+      <span class="validade">Válido todos os dias</span>
+    </div>
+
+    <div class="promocao-card">
+      <h3>Cliente Fiel</h3>
+      <p>Ganhe 15% de desconto nas compras acima de R$ 100 usando o cupom <strong>FIDELIDADE15</strong>.</p>
+      <input type="text" id="input-cupom" placeholder="Digite seu cupom aqui" />
+      <button id="btn-aplicar-cupom">Aplicar Cupom</button>
+      <p id="mensagem-cupom-fidelidade" class="mensagem-cupom"></p>
+    </div>
+
+  </div>
+</section>
+
+<section id="tempo-entrega" class="tempo-entrega">
+  <h2>Tempo Estimado de Entrega</h2>
+  <p id="mensagem-entrega">Calculando o tempo estimado...</p>
+
+  <label for="input-endereco">Informe seu endereço para estimativa mais precisa:</label>
+  <input type="text" id="input-endereco" placeholder="Digite seu endereço" />
+
+  <button id="btn-calcular-tempo">Calcular Tempo</button>
+
+  <p id="resultado-tempo"></p>
+</section>
+
+
+
+   <!-- depoimentos -->
+  <section class="depoimentos" id="depoimentos">
+  <h2>O que nossos clientes dizem</h2>
+
+  <div class="depoimentos-container">
+    <div class="depoimento-card">
+      <p class="texto-depoimento">"A melhor pizza da cidade! Atendimento excelente e entrega super rápida. Recomendo demais!"</p>
+      <p class="cliente-nome">— Ana Souza</p>
+      <p class="avaliacao">★★★★★</p>
+    </div>
+
+    <div class="depoimento-card">
+      <p class="texto-depoimento">"Ambiente acolhedor e pizzas deliciosas. Sempre que posso, peço aqui!"</p>
+      <p class="cliente-nome">— Carlos Oliveira</p>
+      <p class="avaliacao">★★★★☆</p>
+    </div>
+
+    <div class="depoimento-card">
+      <p class="texto-depoimento">"Receita única e ingredientes frescos. Sabor incrível, vale muito a pena!"</p>
+      <p class="cliente-nome">— Mariana Lima</p>
+      <p class="avaliacao">★★★★★</p>
+    </div>
+
+    <div class="depoimento-card">
+        <p class="texto-depoimento">"Sempre que quero uma pizza saborosa e artesanal, é aqui que eu peço. Atendimento nota 10!"</p>
+        <p class="cliente-nome">— Felipe Martins</p>
+        <p class="avaliacao">★★★★★</p>
+    </div>
+
+    <div class="depoimento-card">
+        <p class="texto-depoimento">"Variedade incrível de sabores e tamanhos. Além disso, a entrega sempre chega quentinha e rápida."</p>
+        <p class="cliente-nome">— Juliana Pereira</p>
+        <p class="avaliacao">★★★★☆</p>
+    </div>
+
+    <div class="depoimento-card">
+        <p class="texto-depoimento">"Pizzaria com ambiente familiar e preços justos. Meus filhos adoram a pizza vegetariana deles."</p>
+        <p class="cliente-nome">— Ricardo Alves</p>
+        <p class="avaliacao">★★★★★</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- galeria -->
+  <section class="galeria2" id="galeria">
+  <h2>Galeria de Fotos</h2>
+
+  <div class="galeria-grid2">
+    <div class="foto-item">
+      <img src="images/pizzaria.jpg" alt="Pizza Mussarela" />
+    </div>
+    <div class="foto-item">
+      <img src="images/pizza1.jpg" alt="Pizza Calabresa" />
+    </div>
+    <div class="foto-item">
+      <img src="images/cliente.jpg" alt="Ambiente da Pizzaria" />
+    </div>
+    <div class="foto-item">
+      <img src="images/pizza2.jpg" alt="Equipe da Pizzaria" />
+    </div>
+    <div class="foto-item">
+      <img src="images/decoraçao.jpg" alt="Pizza Portuguesa" />
+    </div>
+    <div class="foto-item">
+      <img src="images/doce.jpg" alt="Pizza Vegetariana" />
+    </div>
+  </div>
+</section>
+
+  <!-- faq -->
+    <section class="faq" id="faq">
+  <h2>Perguntas Frequentes</h2>
+
+  <div class="faq-item">
+    <h3>Quais formas de pagamento vocês aceitam?</h3>
+    <p>Aceitamos dinheiro, cartões de crédito/débito, PIX e vale-refeição (Sodexo, Alelo, Ticket).</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Vocês fazem entrega em toda a cidade?</h3>
+    <p>Sim! Entregamos em toda a cidade. O valor do frete varia conforme o bairro.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>As pizzas são feitas na hora?</h3>
+    <p>Sim! Todas as pizzas são preparadas no momento do pedido, garantindo sabor e frescor.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Posso pedir pizza com metade de um sabor e metade de outro?</h3>
+    <p>Claro! É possível escolher até dois sabores diferentes para a mesma pizza.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Vocês têm opções vegetarianas?</h3>
+    <p>Sim! Temos pizzas vegetarianas deliciosas, preparadas sem nenhum ingrediente de origem animal.</p>
+  </div>
+</section>
+
+  <!-- sobre-pizzaria -->
+  <section class="sobre-pizzaria" id="sobre">
+  <h2>Sobre Nós</h2>
+
+  <article>
+    <h3>Quem Somos</h3>
+    <p>Desde 2005, trazendo pizzas artesanais feitas com ingredientes frescos e muito carinho para a comunidade.</p>
+  </article>
+
+  <article>
+    <h3>Missão</h3>
+    <p>Fazer você se sentir em casa com sabores que combinam qualidade e amor na medida certa.</p>
+  </article>
+
+  <article>
+    <h3>Valores</h3>
+    <ul>
+      <li>Qualidade sempre</li>
+      <li>Respeito e acolhimento</li>
+      <li>Paixão pela pizza</li>
+      <li>Sustentabilidade local</li>
+    </ul>
+  </article>
+
+  <article>
+    <h3>Nosso Toque</h3>
+    <p>Receitas exclusivas e ingredientes direto da comunidade, garantindo sabor único e frescor.</p>
+  </article>
+</section>
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-logo">
+      <h2>Pizzaria do Bairro</h2>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer Navigation">
+      <ul>
+        <li><a href="#cardapio">Cardápio</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-contato" id="contato">
+      <p><i class="fas fa-phone"></i> (21) 99999-9999</p>
+      <p><i class="fas fa-map-marker-alt"></i> Rua das Pizzas, 123 - Bairro</p>
+      <p><i class="fas fa-envelope"></i> contato@pizzariadobairro.com</p>
+    </div>
+
+    <div class="footer-redes" aria-label="Redes Sociais">
+      <a href="#" target="_blank" rel="noopener" aria-label="Instagram">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a href="#" target="_blank" rel="noopener" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i> Facebook
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-copy">
+    <p>© 2025 Pizzaria do Bairro. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+
+
+  <script src="js/script.js"></script>
+  <script src="js/promocoes.js"></script>
+  <script src="js/entrega.js"></script>
+</body>
+</html>
