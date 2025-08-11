@@ -20,7 +20,8 @@
 
 Acesse a página hospedada no GitHub Pages:
 
-👉 [https://seu-usuario.github.io/Pizzaria-do-Bairro-LandingPage/](https://seu-usuario.github.io/Pizzaria-do-Bairro-LandingPage/)
+👉 [link do site](https://samirasfonseca.github.io/Pizzaria-do-Bairro-LandingPage/
+)
 
 ---
 
