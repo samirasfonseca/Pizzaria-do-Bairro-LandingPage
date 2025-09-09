@@ -168,7 +168,8 @@ body {
 
 /*------------------*/
 
-.galeria {
+.galeria,
+.galeria2 {
   max-width: 100vw;
   margin: 2rem 0 0 0;
   padding: 20px;
@@ -180,22 +181,25 @@ body {
   text-align: center;
 }
 
-.galeria h2 {
+.galeria h2,
+.galeria2 h2 {
   font-size: 2.2rem;
   margin-bottom: 30px;
   font-weight: 700;
 }
 
-.galeria-grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.galeria-grid,
+.galeria-grid2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
+  justify-items: center;
 }
 
 .foto-item {
-  width: 13rem;
-  height: 20rem;
+  width: 100%;
+  max-width: 220px; /* limite para não ficar gigante em telas largas */
+  aspect-ratio: 3 / 4; /* mantém proporção mesmo sem altura fixa */
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(94, 11, 21, 0.2);
@@ -204,8 +208,8 @@ body {
 }
 
 .foto-item img {
-  width: 12rem;
-  height: 20rem;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
@@ -213,6 +217,18 @@ body {
 
 .foto-item:hover img {
   transform: scale(1.1);
+}
+
+
+@media (max-width: 480px) {
+  .galeria h2,
+  .galeria2 h2 {
+    font-size: 1.8rem;
+  }
+
+  .foto-item {
+    max-width: 160px;
+  }
 }
 
 /*------------------*/
@@ -231,12 +247,13 @@ body {
   color: #a3b18a;
   font-size: 2.8rem;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .carousel-container {
   width: 100%;
-  max-width: 94vw;
-  margin: 1rem ;
+  max-width: 1200px;
+  margin: 1rem auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,15 +264,13 @@ body {
 
 .carousel-track {
   display: flex;
-  width: 100%;
-  height: 18rem;
+  gap: 1rem;
   transition: transform 0.3s ease-in-out;
   will-change: transform;
-  margin-left: 1rem;
 }
 
 .promo-card {
-  flex: 0 0 250px; /* largura fixa ou mínima do card */
+  flex: 0 0 250px;
   height: 18rem;
   background-color: #b17f05;
   color: #132a13;
@@ -275,26 +290,25 @@ body {
   transform: translateY(-50%);
   background-color: #132a13;
   border: none;
-  color: white;
-  font-size: 2rem;
+  color: #ffffff;
+  font-size: 1.8rem;
   padding: 10px;
   cursor: pointer;
   z-index: 20;
   border-radius: 50%;
-  user-select: none;
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .prev {
-  left: 0.1rem;
+  left: 0.5rem;
 }
 
 .next {
-  right: 0.1rem;
+  right: 0.5rem;
 }
 
 .btn-add {
@@ -313,7 +327,74 @@ body {
 .btn-add:hover {
   background-color: #e5383b;
 }
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .promo-card {
+    flex: 0 0 200px;
+    height: 16rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-container {
+    overflow-x: auto; /* permite rolagem lateral no mobile */
+    scroll-snap-type: x mandatory;
+  }
+
+  .carousel-track {
+    flex-wrap: nowrap;
+  }
+
+  .promo-card {
+    flex: 0 0 70%; /* ocupa mais espaço na tela pequena */
+    height: auto;
+    min-height: 15rem;
+    scroll-snap-align: start;
+  }
+
+  .prev, .next {
+    display: none; /* esconde botões em telas pequenas */
+  }
+}
+
+@media (max-width: 480px) {
+  .cardapio h2 {
+    font-size: 1.8rem;
+  }
+
+  .promo-card {
+    flex: 0 0 85%;
+    padding: 0.8rem;
+  }
+}
 /*------------------ Promoções --------------------*/
+.promocoes-lista {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 1.5rem; 
+}
+
+.promocao-card {
+  background-color: #132a13;
+  color: #132a13;
+  border-radius: 1rem;
+  border: 2px solid #d49a07;
+  width: 18rem;
+  max-width: 18rem;
+  height: auto;
+  min-height: 24rem;
+  padding: 1rem;
+  margin: 0 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.89);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex: 1 1 260px;
+}
 
 .promocoes {
   padding: 2rem;
@@ -327,31 +408,6 @@ body {
 .promocoes h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-}
-
-.promocoes-lista {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.promocao-card {
-  background-color: #132a13;
-  color: #132a13;
-  border-radius: 1rem;
-  border: 2px solid #d49a07;
-  width: 18rem;
-  max-width: 18rem;
-  height: 28rem;
-  padding: 1rem;
-  margin: 0 10px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.89);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
 }
 
 .promocao-card h3 {
@@ -399,9 +455,17 @@ body {
   font-weight: bold;
   color: #d49a07;
 }
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .promocao-card {
+    flex: 1 1 100%; /* ocupa largura total no celular */
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
 /*-------------------------------------------*/
 
-/*-------------------*/
 .tempo-entrega {
   background-color: #132a13;
   border-radius: 2rem;
