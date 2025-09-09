@@ -170,7 +170,7 @@ body {
 
 .galeria {
   max-width: 100vw;
-  margin: 50px auto;
+  margin: 2rem 0 0 0;
   padding: 20px;
   background-color: #a3b18a;
   border-radius: 12px;
@@ -187,12 +187,15 @@ body {
 }
 
 .galeria-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .foto-item {
+  width: 13rem;
+  height: 20rem;
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(94, 11, 21, 0.2);
@@ -201,8 +204,8 @@ body {
 }
 
 .foto-item img {
-  width: 100%;
-  height: 100%;
+  width: 12rem;
+  height: 20rem;
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
@@ -214,7 +217,10 @@ body {
 
 /*------------------*/
 .cardapio {
-  margin: 5rem 2rem;
+  margin: 4rem 0 0 0;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .cardapio h2 {
@@ -224,68 +230,43 @@ body {
   font-weight: 900;
   color: #a3b18a;
   font-size: 2.8rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .carousel-container {
-  position: relative;
-  width: 90vw;
-  max-width: 1200px;
-  margin: 2rem auto;
-  overflow: hidden;
+  width: 100%;
+  max-width: 94vw;
+  margin: 1rem ;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .carousel-track {
   display: flex;
+  width: 100%;
+  height: 18rem;
   transition: transform 0.3s ease-in-out;
   will-change: transform;
+  margin-left: 1rem;
 }
 
 .promo-card {
-  background-color: #d49a07;
+  flex: 0 0 250px; /* largura fixa ou mínima do card */
+  height: 18rem;
+  background-color: #b17f05;
   color: #132a13;
   border-radius: 1rem;
-  min-width: 250px;
-  max-width: 300px;
-  height: 30vh;
-  padding: 1rem;
-  margin: 0 10px;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  flex-shrink: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.514);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.promo-card h3 {
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.promo-card p {
-  margin-bottom: 0.5rem;
-  flex-grow: 1;
-}
-
-.btn-add {
-  margin-top: 8px;
-  background-color: #d00000;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
-}
-
-.btn-add:hover {
-  background-color: #e5383b;
+  justify-content: space-between;
+  padding: 1rem;
+  text-align: center;
+  margin-left: 1rem;
 }
 
 .prev, .next {
@@ -309,77 +290,31 @@ body {
 }
 
 .prev {
-  left: 0.5rem;
+  left: 0.1rem;
 }
 
 .next {
-  right: 0.5rem;
+  right: 0.1rem;
 }
 
-/* ----------- RESPONSIVIDADE ----------- */
-
-@media (max-width: 1024px) {
-  .carousel-container {
-    max-width: 90vw;
-  }
-
-  .promo-card {
-    max-width: 250px;
-    min-width: 220px;
-    height: 28vh;
-  }
+.btn-add {
+  margin-top: 8px;
+  background-color: #d00000;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.514);
 }
 
-@media (max-width: 768px) {
-  .cardapio {
-    margin: 3rem 1rem;
-  }
-
-  .carousel-container {
-    width: 100vw;
-    max-width: 100vw;
-  }
-
-  .promo-card {
-    min-width: 200px;
-    max-width: 220px;
-    height: 25vh;
-    margin: 0 5px;
-  }
-
-  .prev, .next {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.5rem;
-  }
+.btn-add:hover {
+  background-color: #e5383b;
 }
+/*------------------ Promoções --------------------*/
 
-@media (max-width: 480px) {
-  .carousel-container {
-    width: 100vw;
-    max-width: 100vw;
-  }
-
-  /* Deixa o carrossel rolável no celular com scroll horizontal */
-  .carousel-track {
-    overflow-x: auto;
-    scroll-behavior: smooth;
-  }
-
-  .promo-card {
-    min-width: 180px;
-    max-width: 180px;
-    height: 22vh;
-    margin: 0 5px;
-  }
-
-  .prev, .next {
-    display: none; /* Esconder botões no mobile, pois o usuário pode arrastar */
-  }
-}
-
-
-/*-------------------*/
 .promocoes {
   padding: 2rem;
   background-color: #a3b18a;
@@ -390,36 +325,42 @@ body {
 }
 
 .promocoes h2 {
-  color: #132a13;
+  font-size: 2rem;
   margin-bottom: 1rem;
-  font-size: 2.8rem;
-  font-weight: 900;
 }
 
 .promocoes-lista {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
+  align-items: center;
   justify-content: center;
 }
 
 .promocao-card {
   background-color: #132a13;
+  color: #132a13;
+  border-radius: 1rem;
   border: 2px solid #d49a07;
-  padding: 1.5rem;
-  border-radius: 2rem;
-  max-width: 320px;
+  width: 18rem;
+  max-width: 18rem;
+  height: 28rem;
+  padding: 1rem;
+  margin: 0 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.89);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
 
 .promocao-card h3 {
-  margin-bottom: 1rem;
   color: #a46300;
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 
 .promocao-card p {
   color: #a3b18a;
-  margin-bottom: 3rem;
   font-size: 1.2rem;
 }
 
@@ -430,8 +371,7 @@ body {
 
 #input-cupom {
   padding: 0.5rem;
-  margin-top: 1rem;
-  width: 70%;
+  width: 16rem;
   border: 1px solid #d49a07;
   border-radius: 5px;
 }
@@ -444,9 +384,11 @@ body {
   border-radius: 5px;
   cursor: pointer;
   margin-left: 0.5rem;
-  margin-top: 1.8rem;
   font-weight: bold;
-  width: 10rem;
+  width: 16rem;
+  height: 3rem;
+  border: #fad26e solid 1px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.938);
 }
 
 #btn-aplicar-cupom:hover {
@@ -454,10 +396,10 @@ body {
 }
 
 .mensagem-cupom {
-  margin-top: 1rem;
   font-weight: bold;
   color: #d49a07;
 }
+/*-------------------------------------------*/
 
 /*-------------------*/
 .tempo-entrega {
@@ -527,6 +469,8 @@ body {
   margin: 0 auto 1rem auto;
   width: 90%;
   max-width: 400px;
+    border: #fad26e solid 1px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.938);
 }
 
 .tempo-entrega button:hover {
@@ -565,6 +509,10 @@ body {
 
 /*-------------------*/
 .depoimentos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   max-width: 100vw;
   margin: 50px auto;
   padding: 20px 10px;
@@ -588,9 +536,9 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center;
   padding: 0 10px;
   box-sizing: border-box;
+  width: 1200px;
 }
 
 .depoimento-card {
@@ -598,7 +546,8 @@ body {
   border: 2px solid #5e0b15;
   border-radius: 10px;
   padding: 20px;
-  width: 210px;
+  width: 11rem;
+  height: 20rem;
   box-shadow: 0 2px 6px rgba(94, 11, 21, 0.2);
   transition: transform 0.3s ease;
   cursor: default;
@@ -626,7 +575,7 @@ body {
 
 .avaliacao {
   font-size: 1.4rem;
-  color: #d49a07; /* cor dourada para estrelas */
+  color: #d49a07; 
 }
 
 /* Responsividade */
@@ -683,9 +632,8 @@ body {
 }
 
 .galeria-grid2 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
+  display: flex;
+  gap: 1rem;
 }
 
 .foto-item {
@@ -715,15 +663,15 @@ body {
   background-color: #a3b18a;
   width: 100vw;
   display: flex;
-  flex-wrap: wrap;          /* permite quebrar em múltiplas linhas */
-  align-items: flex-start;  /* alinha itens no topo */
+  flex-wrap: wrap;          
+  align-items: center; 
   justify-content: center;
   gap: 1rem;
   box-sizing: border-box;
 }
 
 .faq h2 {
-  width: 100%;              /* título ocupa toda largura */
+  width: 100%;            
   text-align: center;
   font-size: 2em;
   color: #780000;
@@ -736,8 +684,8 @@ body {
   border-radius: 8px;
   padding: 15px;
   transition: transform 0.2s;
-  width: 15vw;               /* largura para telas grandes */
-  min-height: 33vh;
+  width: 15rem;  
+  height: 15rem;            
   box-sizing: border-box;
   cursor: default;
 }
@@ -765,8 +713,8 @@ body {
 /* Tablets e telas médias */
 @media (max-width: 900px) {
   .faq-item {
-    width: 48%;      /* dois itens lado a lado */
-    min-height: auto; /* ajusta altura para conteúdo */
+    width: 48%;      
+    min-height: auto; 
   }
 }
 
@@ -777,7 +725,7 @@ body {
   }
 
   .faq-item {
-    width: 100%;    /* um item por linha */
+    width: 100%;   
     min-height: auto;
     margin: 0 auto;
   }
@@ -843,30 +791,99 @@ body {
   margin-top: 6px;
 }
 
- /*-------------*/
+/* ----------- RESPONSIVIDADE ----------- */
+
+@media (max-width: 1024px) {
+  .carousel-container {
+    max-width: 90vw;
+  }
+
+  .promo-card {
+    max-width: 250px;
+    min-width: 220px;
+    height: 28vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardapio {
+    margin: 3rem 1rem;
+  }
+
+  .carousel-container {
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  .promo-card {
+    min-width: 200px;
+    max-width: 220px;
+    height: 25vh;
+    margin: 0 5px;
+  }
+
+  .prev, .next {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-container {
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  /* Deixa o carrossel rolável no celular com scroll horizontal */
+  .carousel-track {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+  }
+
+  .promo-card {
+    min-width: 180px;
+    max-width: 180px;
+    height: 22vh;
+    margin: 0 5px;
+  }
+
+  .prev, .next {
+    display: none; /* Esconder botões no mobile, pois o usuário pode arrastar */
+  }
+}
+
+/*-------------------*/
+
 .footer {
   background-color: #a5b18a;
   color: #132a13;
   padding: 30px 20px 15px;
   font-family: 'Poppins', sans-serif;
   font-size: 1.2rem;
-  border-radius: 1rem;
+  border-radius: 1rem 1rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .footer-container {
-  max-width: 1100px;
-  margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   gap: 20px;
+}
+
+.container__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .footer-logo h2 {
   font-weight: 700;
   font-size: 1.8rem;
   color: #5e0b15;
-  margin-bottom: 10px;
 }
 
 .footer-nav ul {
@@ -874,7 +891,6 @@ body {
   padding: 0;
   display: flex;
   gap: 20px;
-  margin: 0;
   font-weight: 700;
 }
 
@@ -920,9 +936,8 @@ body {
 
 .footer-copy {
   text-align: center;
-  margin-top: 25px;
   font-size: 0.8rem;
-  color: #a5b18a;
+  color: #283618;
 }
 
 /* Responsividade */
